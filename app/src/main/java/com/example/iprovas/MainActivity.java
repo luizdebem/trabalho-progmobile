@@ -18,8 +18,11 @@ public class MainActivity extends AppCompatActivity {
   private ListView listView;
   private FloatingActionButton fabAddUA;
 
-  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id) {
-    // @TODO Handle click UA
+  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, String uaName) {
+    //Recupera o intente para a tela 2
+    Intent intent = new Intent(this, EditarUA.class);
+    intent.putExtra(UAMetadata.UA_NAME, uaName);
+    startActivity(intent);
   }
 
   private void openCadastroUA(View view) {
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       @Override
       public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemClickListView(parent, view, position, id);
+        onItemClickListView(parent, view, position, id, valores[position]);
       }
     });
 
