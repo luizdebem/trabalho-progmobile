@@ -32,6 +32,13 @@
                 android:layout_height="wrap_content"
                 android:text="EDITAR" />
 
+            <Button
+                android:id="@+id/btnExcluirUA"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#C60707"
+                android:text="EXCLUIR" />
+
         </LinearLayout>
     </RelativeLayout>
 

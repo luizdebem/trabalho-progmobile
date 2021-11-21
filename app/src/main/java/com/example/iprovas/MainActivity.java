@@ -47,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
     listView.setAdapter(adapter);
 
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
       @Override
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+      public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         onItemClickListView(parent, view, position, id, valores[position]);
+        return false;
       }
+
     });
 
     fabAddUA = findViewById(R.id.fabAddUA);
