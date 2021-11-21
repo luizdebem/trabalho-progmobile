@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.iprovas.R;
 import com.example.iprovas.UAMetadata;
+import com.example.iprovas.activities.events.CadastroEvent;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -25,8 +26,10 @@ public class UA extends AppCompatActivity {
     // @TODO tela de editar evento
   }
 
-  private void openCadastroEvent(View view) {
-    // @TODO tela de criar evento
+  private void openCadastroEvent(View view, String uaName) {
+    Intent intent = new Intent(this, CadastroEvent.class);
+    intent.putExtra(UAMetadata.UA_NAME, uaName);
+    startActivity(intent);
   }
 
   @Override
@@ -35,10 +38,11 @@ public class UA extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     String title = "Eventos - ";
+    String uaName = "";
 
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
-      String uaName = extras.getString(UAMetadata.UA_NAME);
+      uaName = extras.getString(UAMetadata.UA_NAME);
       title += uaName;
     }
 
@@ -64,10 +68,11 @@ public class UA extends AppCompatActivity {
     });
 
     fabAddEvent = findViewById(R.id.fabAddUA);
+    String finalUaName = uaName;
     fabAddEvent.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        openCadastroEvent(v);
+        openCadastroEvent(v, finalUaName);
       }
     });
 
