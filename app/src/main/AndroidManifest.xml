@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IProvas">
-        <activity android:name=".EditarUA"></activity>
+        <activity android:name=".UA"></activity>
+        <activity android:name=".EditarUA" />
         <activity android:name=".CadastroUA" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -14,35 +14,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class UA extends AppCompatActivity {
+
   private ListView listView;
-  private FloatingActionButton fabAddUA;
+  private FloatingActionButton fabAddEvent;
 
   private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, String uaName) {
-    Intent intent = new Intent(this, EditarUA.class);
-    intent.putExtra(UAMetadata.UA_NAME, uaName);
-    startActivity(intent);
+    // @TODO tela de editar evento
   }
 
-  private void openCadastroUA(View view) {
-    Intent intent = new Intent(this, CadastroUA.class);
-    startActivity(intent);
-  }
-
-  private void openUA(View v, String uaName) {
-    Intent intent = new Intent(this, UA.class);
-    intent.putExtra(UAMetadata.UA_NAME, uaName);
-    startActivity(intent);
+  private void openCadastroEvent(View view) {
+    // @TODO tela de criar evento
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    setTitle("iProvas - Listagem de UAs");
 
     String[] valores = new String[]{
-            "Inteligência Artificial", "Dispositivos Móveis", "Bancos de Dados", "Algoritmos"
+            "Prova 1", "Prova 2", "Prova 3", "Prova 4"
     };
 
     listView = findViewById(R.id.uaListView);
@@ -60,18 +51,13 @@ public class MainActivity extends AppCompatActivity {
       }
     });
 
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-      public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
-        openUA(v, valores[pos]);
+    fabAddEvent = findViewById(R.id.fabAddUA);
+    fabAddEvent.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        openCadastroEvent(v);
       }
     });
 
-    fabAddUA = findViewById(R.id.fabAddUA);
-    fabAddUA.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        openCadastroUA(v);
-      }
-    });
   }
 }
