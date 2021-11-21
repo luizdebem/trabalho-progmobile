@@ -1,4 +1,4 @@
-package com.example.iprovas;
+package com.example.iprovas.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.iprovas.activities.ua.CadastroUA;
+import com.example.iprovas.activities.ua.EditarUA;
+import com.example.iprovas.R;
+import com.example.iprovas.activities.ua.UA;
+import com.example.iprovas.UAMetadata;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-    setTitle("iProvas - Listagem de UAs");
+    setTitle("Listagem de UAs");
 
     String[] valores = new String[]{
             "Inteligência Artificial", "Dispositivos Móveis", "Bancos de Dados", "Algoritmos"

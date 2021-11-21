@@ -1,4 +1,4 @@
-package com.example.iprovas;
+package com.example.iprovas.activities.ua;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.iprovas.R;
+import com.example.iprovas.UAMetadata;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -31,6 +33,16 @@ public class UA extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    String title = "Eventos - ";
+
+    Bundle extras = getIntent().getExtras();
+    if (extras != null) {
+      String uaName = extras.getString(UAMetadata.UA_NAME);
+      title += uaName;
+    }
+
+    setTitle(title);
 
     String[] valores = new String[]{
             "Prova 1", "Prova 2", "Prova 3", "Prova 4"

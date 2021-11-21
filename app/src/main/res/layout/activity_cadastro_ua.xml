@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CadastroUA">
+    tools:context=".activities.ua.CadastroUA">
 
     <RelativeLayout
         android:layout_width="match_parent"

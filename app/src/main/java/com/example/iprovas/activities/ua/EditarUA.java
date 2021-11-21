@@ -1,9 +1,12 @@
-package com.example.iprovas;
+package com.example.iprovas.activities.ua;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.EditText;
+
+import com.example.iprovas.R;
+import com.example.iprovas.UAMetadata;
 
 public class EditarUA extends AppCompatActivity {
 
@@ -13,7 +16,7 @@ public class EditarUA extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_editar_ua);
-    setTitle("iProvas - Edição de UA");
+    setTitle("Edição de UA");
 
     inputUA = findViewById(R.id.inputUA);
 

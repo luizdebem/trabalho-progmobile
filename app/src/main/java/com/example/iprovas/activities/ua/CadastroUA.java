@@ -1,8 +1,10 @@
-package com.example.iprovas;
+package com.example.iprovas.activities.ua;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.iprovas.R;
 
 public class CadastroUA extends AppCompatActivity {
 
