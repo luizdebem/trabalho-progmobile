@@ -34,6 +34,7 @@ public class UA extends AppCompatActivity {
     intent.putExtra(EventMetadata.EVENT_NAME, event.getName());
     intent.putExtra(EventMetadata.EVENT_ID, event.getId());
     intent.putExtra(EventMetadata.EVENT_UA_ID, event.getUaId());
+    intent.putExtra(EventMetadata.EVENT_DATE, event.getDate());
 
     startActivity(intent);
   }

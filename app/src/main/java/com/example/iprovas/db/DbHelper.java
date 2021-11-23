@@ -9,7 +9,7 @@ public class DbHelper extends SQLiteOpenHelper {
   private static final String DATABASE_NAME = "iProvas.db";
   private static final int DATABASE_VERSION = 1;
   private final String CREATE_TABLE_UA = "CREATE TABLE UA (ID VARCHAR(100) PRIMARY KEY, name VARCHAR(100));";
-  private final String CREATE_TABLE_EVENT = "CREATE TABLE Event (ID VARCHAR(100) PRIMARY KEY, name VARCHAR(100), uaId VARCHAR(100), FOREIGN KEY (uaId) REFERENCES UA(ID));";
+  private final String CREATE_TABLE_EVENT = "CREATE TABLE Event (ID VARCHAR(100) PRIMARY KEY, date INTEGER, name VARCHAR(100), uaId VARCHAR(100), FOREIGN KEY (uaId) REFERENCES UA(ID));";
 
   public DbHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);

@@ -12,8 +12,9 @@ import com.example.iprovas.R;
 import com.example.iprovas.UAMetadata;
 import com.example.iprovas.db.EventDao;
 import com.example.iprovas.models.Event;
-import com.example.iprovas.models.UAModel;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
@@ -52,8 +53,13 @@ public class CadastroEvent extends AppCompatActivity {
 
     calendarView.setDate(selectedDate.get());
 
-    calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
-      selectedDate.set(view.getDate());
+    calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+      @Override
+      public void onSelectedDayChange(CalendarView view, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+        selectedDate.set(c.getTimeInMillis());
+      }
     });
 
     String finalUaId = uaId;
@@ -61,7 +67,8 @@ public class CadastroEvent extends AppCompatActivity {
 
       @Override
       public void onClick(View v) {
-        dao.salvar(new Event(UUID.randomUUID().toString().replace("-", ""), inputEvent.getText().toString(), finalUaId));
+        // System.out.println(new SimpleDateFormat("dd/MM/yyyy").format(new Date(selectedDate.get())));
+        dao.salvar(new Event(UUID.randomUUID().toString().replace("-", ""), inputEvent.getText().toString(), finalUaId, selectedDate.get()));
         finish();
       }
     });

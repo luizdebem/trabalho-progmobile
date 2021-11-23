@@ -1,14 +1,19 @@
 package com.example.iprovas.models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Event {
   String id;
   String name;
   String uaId;
+  long date;
 
-  public Event(String id, String name, String uaId) {
+  public Event(String id, String name, String uaId, long date) {
     this.id = id;
     this.name = name;
     this.uaId = uaId;
+    this.date = date;
   }
 
   public String getId() {
@@ -35,8 +40,16 @@ public class Event {
     this.uaId = uaId;
   }
 
+  public long getDate() {
+    return date;
+  }
+
+  public void setDate(long date) {
+    this.date = date;
+  }
+
   @Override
   public String toString() {
-    return name;
+    return new SimpleDateFormat("dd/MM/YYYY").format(new Date(getDate())) + " - " + name;
   }
 }

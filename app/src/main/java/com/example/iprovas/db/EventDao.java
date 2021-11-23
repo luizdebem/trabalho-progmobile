@@ -34,7 +34,8 @@ public class EventDao {
       String id = cursor.getString(cursor.getColumnIndex("ID"));
       String name = cursor.getString(cursor.getColumnIndex("name"));
       String fk = cursor.getString(cursor.getColumnIndex("uaId"));
-      events.add(new Event(id, name, fk));
+      long date = cursor.getLong(cursor.getColumnIndex("date"));
+      events.add(new Event(id, name, fk, date));
     }
     cursor.close();
     return events;
@@ -46,27 +47,26 @@ public class EventDao {
     while (cursor.moveToNext()) {
       String name = cursor.getString(cursor.getColumnIndex("name"));
       String uaId = cursor.getString(cursor.getColumnIndex("uaId"));
-      event = new Event(id, name, uaId);
+      long date = cursor.getLong(cursor.getColumnIndex("date"));
+      event = new Event(id, name, uaId, date);
     }
     return event;
   }
 
   public boolean salvar(Event event){
-    System.out.println(event.getId());
-    System.out.println(event.getName());
-    System.out.println(event.getUaId());
     Event existente = busca(event.getId());
 
     if(existente != null) {
-      System.out.println("Jonassss");
       ContentValues cv = new ContentValues();
       cv.put("name", event.getName());
+      cv.put("date", event.getDate());
       return gw.getDatabase().update(TABLE_EVENT, cv, "ID=?", new String[]{ existente.getId() }) > 0;
     }
     else {
       ContentValues cv = new ContentValues();
       cv.put("id", event.getId());
       cv.put("name", event.getName());
+      cv.put("date", event.getDate());
       cv.put("uaId", event.getUaId());
       return gw.getDatabase().insert(TABLE_EVENT, null, cv) > 0;
     }
