@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
+  private void openHelp(View v) {
+    Intent intent = new Intent(this, InfoActivity.class);
+    startActivity(intent);
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -54,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     super.onStart();
     ListView listView;
     FloatingActionButton fabAddUA;
+    FloatingActionButton fabHelp;
 
     listView = findViewById(R.id.uaListView);
 
@@ -83,6 +89,14 @@ public class MainActivity extends AppCompatActivity {
       @Override
       public void onClick(View v) {
         openCadastroUA(v);
+      }
+    });
+
+    fabHelp = findViewById(R.id.fabHelp);
+    fabHelp.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        openHelp(v);
       }
     });
   }
