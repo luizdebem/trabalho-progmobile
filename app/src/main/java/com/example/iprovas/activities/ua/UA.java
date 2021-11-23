@@ -9,9 +9,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.iprovas.EventMetadata;
 import com.example.iprovas.R;
 import com.example.iprovas.UAMetadata;
 import com.example.iprovas.activities.events.CadastroEvent;
+import com.example.iprovas.activities.events.EditarEvent;
 import com.example.iprovas.db.EventDao;
 import com.example.iprovas.db.UADao;
 import com.example.iprovas.models.Event;
@@ -28,7 +30,12 @@ public class UA extends AppCompatActivity {
   private FloatingActionButton fabAddEvent;
 
   private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, Event event) {
-    // @TODO tela de editar evento
+    Intent intent = new Intent(this, EditarEvent.class);
+    intent.putExtra(EventMetadata.EVENT_NAME, event.getName());
+    intent.putExtra(EventMetadata.EVENT_ID, event.getId());
+    intent.putExtra(EventMetadata.EVENT_UA_ID, event.getUaId());
+
+    startActivity(intent);
   }
 
   private void openCadastroEvent(View view, String uaName, String uaId) {
