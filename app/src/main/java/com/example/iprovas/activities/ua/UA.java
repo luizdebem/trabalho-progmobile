@@ -22,6 +22,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class UA extends AppCompatActivity {
@@ -72,6 +75,7 @@ public class UA extends AppCompatActivity {
 
     EventDao dao = new EventDao(getBaseContext());
     List<Event> events = dao.listar(uaId);
+    Collections.sort(events, (o1, o2) -> new Date(o2.getDate()).compareTo(new Date(o1.getDate())));
     ArrayList<Event> listaValores = new ArrayList<Event>(events);
     ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, listaValores);
 
