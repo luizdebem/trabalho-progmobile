@@ -14,18 +14,19 @@ import com.example.iprovas.activities.ua.EditarUA;
 import com.example.iprovas.R;
 import com.example.iprovas.activities.ua.UA;
 import com.example.iprovas.UAMetadata;
+import com.example.iprovas.db.UADao;
+import com.example.iprovas.models.UAModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-  private ListView listView;
-  private FloatingActionButton fabAddUA;
-
-  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, String uaName) {
+  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, UAModel ua) {
     Intent intent = new Intent(this, EditarUA.class);
-    intent.putExtra(UAMetadata.UA_NAME, uaName);
+    intent.putExtra(UAMetadata.UA_ID, ua.getId());
+    intent.putExtra(UAMetadata.UA_NAME, ua.getName());
     startActivity(intent);
   }
 
@@ -34,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
     startActivity(intent);
   }
 
-  private void openUA(View v, String uaName) {
+  private void openUA(View v, UAModel ua) {
     Intent intent = new Intent(this, UA.class);
-    intent.putExtra(UAMetadata.UA_NAME, uaName);
+    intent.putExtra(UAMetadata.UA_ID, ua.getId());
+    intent.putExtra(UAMetadata.UA_NAME, ua.getName());
     startActivity(intent);
   }
 
@@ -45,29 +47,34 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     setTitle("Listagem de UAs");
+  }
 
-    String[] valores = new String[]{
-            "Inteligência Artificial", "Dispositivos Móveis", "Bancos de Dados", "Algoritmos"
-    };
+  @Override
+  protected void onStart() {
+    super.onStart();
+    ListView listView;
+    FloatingActionButton fabAddUA;
 
     listView = findViewById(R.id.uaListView);
 
-    ArrayList<String> listaValores = new ArrayList<>(Arrays.asList(valores));
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaValores);
+    UADao dao = new UADao(getBaseContext());
+    List<UAModel> uas = dao.listar();
+    ArrayList<UAModel> listaValores = new ArrayList<UAModel>(uas);
+    ArrayAdapter<UAModel> adapter = new ArrayAdapter<UAModel>(this, android.R.layout.simple_list_item_1, listaValores);
 
     listView.setAdapter(adapter);
 
     listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
       @Override
       public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemClickListView(parent, view, position, id, valores[position]);
+        onItemClickListView(parent, view, position, id, uas.get(position));
         return false;
       }
     });
 
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
       public void onItemClick(AdapterView<?> list, View v, int pos, long id) {
-        openUA(v, valores[pos]);
+        openUA(v, uas.get(pos));
       }
     });
 

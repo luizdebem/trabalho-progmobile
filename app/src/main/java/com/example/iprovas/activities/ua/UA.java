@@ -12,23 +12,29 @@ import android.widget.ListView;
 import com.example.iprovas.R;
 import com.example.iprovas.UAMetadata;
 import com.example.iprovas.activities.events.CadastroEvent;
+import com.example.iprovas.db.EventDao;
+import com.example.iprovas.db.UADao;
+import com.example.iprovas.models.Event;
+import com.example.iprovas.models.UAModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class UA extends AppCompatActivity {
 
   private ListView listView;
   private FloatingActionButton fabAddEvent;
 
-  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, String uaName) {
+  private void onItemClickListView(AdapterView<?> parent, View view, int position, long id, Event event) {
     // @TODO tela de editar evento
   }
 
-  private void openCadastroEvent(View view, String uaName) {
+  private void openCadastroEvent(View view, String uaName, String uaId) {
     Intent intent = new Intent(this, CadastroEvent.class);
     intent.putExtra(UAMetadata.UA_NAME, uaName);
+    intent.putExtra(UAMetadata.UA_ID, uaId);
     startActivity(intent);
   }
 
@@ -36,45 +42,49 @@ public class UA extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+  }
 
+  @Override
+  protected void onStart() {
+    super.onStart();
     String title = "Eventos - ";
     String uaName = "";
+    String uaId = null;
 
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       uaName = extras.getString(UAMetadata.UA_NAME);
+      uaId = extras.getString(UAMetadata.UA_ID);
       title += uaName;
     }
 
     setTitle(title);
 
-    String[] valores = new String[]{
-            "Prova 1", "Prova 2", "Prova 3", "Prova 4"
-    };
-
     listView = findViewById(R.id.uaListView);
 
-    ArrayList<String> listaValores = new ArrayList<>(Arrays.asList(valores));
-    ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaValores);
+    EventDao dao = new EventDao(getBaseContext());
+    List<Event> events = dao.listar(uaId);
+    ArrayList<Event> listaValores = new ArrayList<Event>(events);
+    ArrayAdapter<Event> adapter = new ArrayAdapter<Event>(this, android.R.layout.simple_list_item_1, listaValores);
 
     listView.setAdapter(adapter);
 
     listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
       @Override
       public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        onItemClickListView(parent, view, position, id, valores[position]);
+        onItemClickListView(parent, view, position, id, events.get(position));
         return false;
       }
     });
 
     fabAddEvent = findViewById(R.id.fabAddUA);
     String finalUaName = uaName;
+    String finalUaId = uaId;
     fabAddEvent.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        openCadastroEvent(v, finalUaName);
+        openCadastroEvent(v, finalUaName, finalUaId);
       }
     });
-
   }
 }

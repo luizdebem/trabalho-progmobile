@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/inputUA"
+                android:id="@+id/inputSalvarUA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="22dp"
@@ -27,7 +27,7 @@
                 android:inputType="textPersonName" />
 
             <Button
-                android:id="@+id/btnEditarUA"
+                android:id="@+id/btnSalvarUA"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="SALVAR" />

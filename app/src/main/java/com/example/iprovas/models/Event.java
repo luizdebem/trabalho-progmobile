@@ -3,10 +3,12 @@ package com.example.iprovas.models;
 public class Event {
   String id;
   String name;
+  String uaId;
 
-  Event(String id, String name) {
+  public Event(String id, String name, String uaId) {
     this.id = id;
     this.name = name;
+    this.uaId = uaId;
   }
 
   public String getId() {
@@ -23,5 +25,18 @@ public class Event {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getUaId() {
+    return uaId;
+  }
+
+  public void setUaId(String uaId) {
+    this.uaId = uaId;
+  }
+
+  @Override
+  public String toString() {
+    return name;
   }
 }

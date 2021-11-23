@@ -1,16 +1,13 @@
 package com.example.iprovas.models;
 
-import java.util.List;
 
-public class UA {
+public class UAModel {
   String id;
   String name;
-  List<Event> events;
 
-  UA(String id, String name, List<Event> events) {
+  public UAModel(String id, String name) {
     this.id = id;
     this.name = name;
-    this.events = events;
   }
 
   public String getId() {
@@ -29,11 +26,8 @@ public class UA {
     this.name = name;
   }
 
-  public List<Event> getEvents() {
-    return events;
-  }
-
-  public void setEvents(List<Event> events) {
-    this.events = events;
+  @Override
+  public String toString() {
+    return name;
   }
 }
